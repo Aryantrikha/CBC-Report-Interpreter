@@ -1,7 +1,7 @@
 # CBC-Report-Interpreter
 # CBC Report Interpreter
 
-A Streamlit-based application that extracts CBC (Complete Blood Count) values from medical reports using OCR and predicts the urgency level using a machine learning model.
+An application that extracts CBC (Complete Blood Count) values from medical reports using OCR and predicts the urgency level using a machine learning model.
 
 > This project is developed for educational purposes and is not intended to replace professional medical advice.
 
@@ -44,11 +44,6 @@ project/
 
 ## Installation
 
-Clone the repository:
-
-```bash
-
-```
 
 Create a virtual environment:
 
@@ -76,11 +71,6 @@ Install Tesseract OCR and update its path in `extractor.py` if required.
 
 ---
 
-## Run
-
-
-
----
 
 ## Model
 
