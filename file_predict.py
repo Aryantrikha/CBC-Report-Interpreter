@@ -4,7 +4,7 @@ import extractor
 import os
 import math
 
-FEATURES = ['HGB','WBC','RBC','PLT','HCT','MCV','MCH','MCHC','RDWSD','RDWCV']
+FEATURES = ['HGB','WBC','RBC','PLT',]
 
 # Normal lab ranges (adult, generic) used for rule scoring + abnormal flags
 NORMAL_RANGES={
@@ -12,12 +12,7 @@ NORMAL_RANGES={
     "WBC": (2, 20),
     "RBC": (3, 7),
     "PLT": (50, 700),
-    "HCT": (20, 60),
-    "MCV": (60, 120),
-    "MCH": (20, 40),
-    "MCHC": (25, 40),
-    "RDWSD": (20, 80),
-    "RDWCV": (8, 25),
+
 }
 # Medical importance weights (heavier for core CBC safety signals)
 WEIGHTS = {
@@ -26,11 +21,7 @@ WEIGHTS = {
     "HGB":  2.0,   # anemia risk
     "HCT":  1.6,
     "PLT":  2.2,   # bleeding risk
-    "MCV":  0.8,
-    "MCH":  0.8,
-    "MCHC": 0.8,
-    "RDWCV": 0.6,
-    "RDWSD": 0.6,
+    
 }
 
 # Map severity to an ordinal to combine with model output
@@ -138,11 +129,6 @@ def friendly_explanations(values: dict):
     elif o == "high":
         add("Platelets are elevated; consider discussing with a clinician if persistent.")
 
-    # Indices
-    if outside("MCV") in ("low","high") or outside("MCH") in ("low","high") or outside("MCHC") in ("low","high"):
-        add("Red cell indices (MCV/MCH/MCHC) are outside typical ranges; could relate to iron, B12/folate status, or other causes.")
-    if v.get("RDWCV") is None and v.get("RDWSD") is None:
-        add("RDW values are missing; variability of red cells cannot be evaluated.")
 
     if not msgs:
         add("All visible parameters look within expected ranges.")
